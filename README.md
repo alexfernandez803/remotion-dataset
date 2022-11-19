@@ -10,34 +10,13 @@ Example usage of a Dataset or sets of record in Remotion
 ## This assumes that you already bootstrapped you're remotion project
 
 
-## Completed video with combined credits 
+## Completed video with all after credits 
 
 https://user-images.githubusercontent.com/7582277/202846276-b0254ba6-b052-4972-957d-a16ed33af884.mp4
 
 
 ## Individual after credit
 https://user-images.githubusercontent.com/7582277/202846306-bc6ea465-e7e9-4d33-b8e6-655cf09eb4d4.mp4
-
-
-https://user-images.githubusercontent.com/7582277/202846311-c0d60e19-1ee8-493b-8cf5-7010310214da.mp4
-
-
-
-https://user-images.githubusercontent.com/7582277/202846314-74bcb2da-8569-4bd6-bcfd-024c4bfc75e8.mp4
-
-
-
-https://user-images.githubusercontent.com/7582277/202846316-e2122efb-f77e-4ff6-b51e-339896c1ec00.mp4
-
-
-
-https://user-images.githubusercontent.com/7582277/202846318-8d28369d-706c-4440-9202-9b7d6a1e02cb.mp4
-
-
-
-https://user-images.githubusercontent.com/7582277/202846308-e7555896-a2bf-40c7-9776-7ca26a019607.mp4
-
-
 
 https://user-images.githubusercontent.com/7582277/202846310-2afe9cc3-3c3b-4c74-b762-aa85e28fe36f.mp4
 
