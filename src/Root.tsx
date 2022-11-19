@@ -1,6 +1,6 @@
 import { Composition } from 'remotion';
-import Credits from './Credits';
-import CreditItem from './Credits/components/CreditItem';
+import Credits from './AfterCredits';
+import CreditItem from './AfterCredits/components/AfterCreditItem';
 
 import { getFont } from "./lib/load-font";
 getFont();
@@ -22,7 +22,7 @@ export const RemotionRoot: React.FC = () => {
 			/>
 
 			<Composition
-				id="CreditItem"
+				id="AfterCreditItem"
 				component={CreditItem}
 				durationInFrames={150}
 				fps={30}
@@ -42,7 +42,7 @@ export const RemotionRoot: React.FC = () => {
 
 
 			<Composition
-				id="CreditItemSingle"
+				id="AfterCreditItemSingle"
 				component={CreditItem}
 				durationInFrames={150}
 				fps={30}

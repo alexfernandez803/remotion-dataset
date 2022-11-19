@@ -1,7 +1,7 @@
 import React from "react";
 import { AbsoluteFill } from "remotion";
 import data from "./creditsdata.json";
-import { CreditsList } from "./components/CreditsList";
+import { CreditsList } from "./components/AfterCreditList";
 
 const Credits: React.FC = () => {
   return (

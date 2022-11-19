@@ -1,7 +1,7 @@
 import { AbsoluteFill, spring, useCurrentFrame, useVideoConfig } from "remotion";
 import Description from "./Description";
-import SourceTypeComp from "./SourceTypeComp";
-import { Credit } from "../types";
+import SourceTypeComp from "./SourceType";
+import { AfterCreditType } from "../types";
 
 type Props = {
   children?: JSX.Element | JSX.Element[];
@@ -31,7 +31,7 @@ const Single: React.FC<Props> = ({ children }) => {
   </AbsoluteFill>
 }
 
-const CreditItem: React.FC<Credit> = ({ name, source_type, metadata, isSingle }) => {
+const CreditItem: React.FC<AfterCreditType> = ({ name, source_type, metadata, isSingle }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
 
@@ -71,7 +71,7 @@ const CreditItem: React.FC<Credit> = ({ name, source_type, metadata, isSingle })
   )
 }
 
-const Main: React.FC<Credit> = (credit) => {
+const Main: React.FC<AfterCreditType> = (credit) => {
 
   if (credit.isSingle)
     return (

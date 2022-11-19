@@ -1,13 +1,13 @@
 import React from "react";
 import { AbsoluteFill, interpolate, useCurrentFrame, useVideoConfig } from "remotion";
 import { BACKGROUND } from "../../lib/utils";
-import CreditItem from "./CreditItem";
-import CreditTitle from "./CreditsTitle";
-import { Credit } from "../types";
+import CreditItem from "./AfterCreditItem";
+import CreditTitle from "./AfterCreditTitle";
+import { AfterCreditType } from "../types";
 
 
 const CreditsList: React.FC<{
-  credits: Array<Credit>
+  credits: Array<AfterCreditType>
 }> = ({
   credits
 }) => {

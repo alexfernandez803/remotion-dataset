@@ -5,9 +5,7 @@ id: dataset
 title: JSON dataset with Remotion
 ---
 
-Example usage of a Dataset or sets of record in Remotion
-
-## This assumes that you already bootstrapped you're remotion project
+Example usage of a Dataset or sets of record in Remotion. The dataset is a collection of package or tutorial links information.
 
 
 ## Completed video with all after credits 
@@ -19,6 +17,8 @@ https://user-images.githubusercontent.com/7582277/202846276-b0254ba6-b052-4972-9
 https://user-images.githubusercontent.com/7582277/202846306-bc6ea465-e7e9-4d33-b8e6-655cf09eb4d4.mp4
 
 https://user-images.githubusercontent.com/7582277/202846310-2afe9cc3-3c3b-4c74-b762-aa85e28fe36f.mp4
+
+## This assumes that you already bootstrapped you're remotion project
 
 
 ## Creating a JSON structure

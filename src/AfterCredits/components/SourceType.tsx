@@ -1,5 +1,3 @@
-import { SourceType } from "../types";
-
 const SourceTypeElem: React.FC<{
   sourceType: string
 }> = ({ sourceType }) => {

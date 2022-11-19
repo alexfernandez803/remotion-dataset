@@ -1,9 +1,9 @@
 import { interpolate, useCurrentFrame } from "remotion";
-import { Metadata } from "../types"
+import { MetadataType } from "../types"
 
 const Description: React.FC<{
   name: string,
-  metadata: Metadata
+  metadata: MetadataType
 }> = ({ name, metadata }) => {
   const frame = useCurrentFrame();
 

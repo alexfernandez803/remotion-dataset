@@ -1,11 +1,11 @@
 import path from "path";
 import { bundle } from "@remotion/bundler";
 import { getCompositions, renderMedia } from "@remotion/renderer";
-import { Credit } from "./Credits/types";
-import json from "./Credits/creditsdata.json"
+import { AfterCreditType } from "./AfterCredits/types";
+import json from "./AfterCredits/creditsdata.json"
 
 
-const renderOne = async (credit: Credit, bundleLocation: string, compositionId: string, entry: String) => {
+const renderOne = async (credit: AfterCreditType, bundleLocation: string, compositionId: string, entry: String) => {
     // Parametrize the video by passing arbitrary props to your component.
 
     // Extract all the compositions you have defined in your project
@@ -42,7 +42,7 @@ const renderOne = async (credit: Credit, bundleLocation: string, compositionId: 
 const start = async () => {
 
     // The composition you want to render
-    const compositionId = "CreditItem";
+    const compositionId = "AfterCreditItem";
 
     // You only have to do this once, you can reuse the bundle.
     const entry = "src/index.ts";
