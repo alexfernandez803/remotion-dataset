@@ -16,6 +16,8 @@ The record contains bill of materials or credits to project that is used to crea
 
 ## Completed video 
 
+https://github.com/alexfernandez803/remotion-dataset/blob/main/videos/Main.mp4
+
 ## Sample json record
 
 Record that is installed in the npm project
