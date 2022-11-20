@@ -6,6 +6,7 @@
     "start": "remotion preview",
     "build": "remotion render Main out/Main.mp4",
     "upgrade": "remotion upgrade",
+    "render": "ts-node ./src/render.ts",
     "test": "eslint src --ext ts,tsx,js,jsx && tsc"
   },
   "repository": {},

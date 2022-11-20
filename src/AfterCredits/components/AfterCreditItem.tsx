@@ -86,9 +86,4 @@ const Main: React.FC<AfterCreditType> = (credit) => {
 
 }
 
-
-
-
-
-
 export default Main;

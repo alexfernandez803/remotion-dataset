@@ -5,7 +5,7 @@ id: dataset
 title: JSON dataset with Remotion
 ---
 
-Example usage of a Dataset or sets of record in Remotion. The dataset is a collection of package or tutorial links information.
+Example usage of a Dataset or sets of record in Remotion. The dataset is a collection of package or tutorial used in project.
 
 
 ## Completed video with all after credits 
@@ -13,22 +13,32 @@ Example usage of a Dataset or sets of record in Remotion. The dataset is a colle
 https://user-images.githubusercontent.com/7582277/202846276-b0254ba6-b052-4972-957d-a16ed33af884.mp4
 
 
-## Individual after credit
+### Individual after credit
 https://user-images.githubusercontent.com/7582277/202846306-bc6ea465-e7e9-4d33-b8e6-655cf09eb4d4.mp4
 
 https://user-images.githubusercontent.com/7582277/202846310-2afe9cc3-3c3b-4c74-b762-aa85e28fe36f.mp4
 
-## This assumes that you already bootstrapped you're remotion project
+
+## Problem
+How to individually extract a video with different parameter from a set of records.
+
+## Solution
+Create a separate process to bundle the remotion project, pass the data and render video separately using node js. We will be leveraging `@remotion/renderer` package and [render video in nodejs ](https://www.remotion.dev/docs/ssr/#render-a-video-using-nodejs-apis).
 
 
-## Creating a JSON structure
+## Let's work out the solution
+
+### This assumes that you already bootstrapped you're remotion project
+
+### Create a JSON structure
 
 Let's start a simple json record that represents data that needs to automatically animated.
 The record contains bill of materials or credits to project that is used to create a remotion video, in movies an after credits.
 
-## Sample json record
 
-Record that is installed in the npm project
+### Sample json record
+
+1. Record that is installed in the npm project
 
 ```json
   {
@@ -39,7 +49,7 @@ Record that is installed in the npm project
     }
   }
 ```
-Another record that serve as 
+2. Another record from github that we learned the technique
 
 ```json
   {
@@ -51,101 +61,67 @@ Another record that serve as
   }
 ```
 
-## Represent the data as an structure in React
+### Parameter types
+``` tsx twoslash
+interface MetadataType {
+  cover_url?: string;
+  project_url: string;
+}
 
-```tsx twoslash
-  import data from "./creditsdata.json";
-```
-
-## Main remotion composition
-
-```tsx twoslash
-  import React from "react";
-  import { AbsoluteFill, interpolate, useCurrentFrame, useVideoConfig } from "remotion";
-  import { BACKGROUND } from "../../lib/utils";
-  import CreditItem from "./CreditItem";
-  import CreditTitle from "./CreditsTitle";
-  import { Credit } from "../types";
+interface AfterCreditType {
+  name: string;
+  source_type: string;
+  metadata: MetadataType,
+  isSingle?: boolean,
+}
 
 
-  const CreditsList: React.FC<{
-    credits: Array<Credit>
-  }> = ({
-    credits
-  }) => {
-      const frame = useCurrentFrame();
-
-      const value = interpolate(frame, [1, (credits.length - 1) * 4], [0, credits.length], {
-        extrapolateLeft: 'clamp',
-        extrapolateRight: 'clamp'
-      })
-
-      const theCredits = credits.slice(0, value);
-
-      return (
-        <AbsoluteFill style={{
-          display: 'flex',
-          background: BACKGROUND,
-          padding: '50px',
-        }}>
-          <CreditTitle />
-          <div style={{
-            display: 'flex',
-            flexDirection: 'row',
-            background: BACKGROUND,
-            padding: '50px',
-            justifyContent: 'center',
-            justifyItems: 'center',
-            flexFlow: 'wrap',
-          }}>
-            {theCredits.map((item, index) => <CreditItem key={`${item.name}-${index}`} {...item} />)}
-          </div>
-        </AbsoluteFill>
-
-      )
-    }
-
-  export { CreditsList }
+export {
+  MetadataType,
+  AfterCreditType
+}
 
 ```
 
-The `value` represents the iteration of `credits`, from frame 1 to n(number of items) will give us where we at the iteration. This will give us an effect that items are being slowly added in the page.
+This represents the json into React parameter types
 
-`credits.slice(0, value);` will combine the array item, one a time
-
-```
-  <div style={{
-            display: 'flex',
-            flexDirection: 'row',
-            background: BACKGROUND,
-            padding: '50px',
-            justifyContent: 'center',
-            justifyItems: 'center',
-            flexFlow: 'wrap',
-          }}>
-          ....
-```
-
-The container of the items is configured with flexbox layout with `flexFlow` as `wrap` so when the items don't fit the `width` of the container it will automatically go down.
-
+## React component to represent individual after credit
 
 ``` tsx twoslash
-   {theCredits.map((item, index) => <CreditItem key={`${item.name}-${index}`} {...item} />)}
-
-```
-While new items are being slowly added in `theCredits` main component will be updated.
-
-## Individual Credit items
-
-Individual item of credit has it's own animation 
-
-``` tsx twoslash
-  import { spring, useCurrentFrame, useVideoConfig } from "remotion";
+import { AbsoluteFill, spring, useCurrentFrame, useVideoConfig } from "remotion";
 import Description from "./Description";
-import SourceType from "./SourceType";
-import { Credit } from "../types";
+import SourceTypeComp from "./SourceType";
+import { AfterCreditType } from "../types";
 
-const CreditItem: React.FC<Credit> = ({ name, source_type, metadata }) => {
+type Props = {
+  children?: JSX.Element | JSX.Element[];
+};
+
+
+const Single: React.FC<Props> = ({ children }) => {
+  return <AbsoluteFill
+    style={{
+      display: 'flex',
+      alignContent: 'center',
+      justifyContent: 'center',
+      justifyItems: "center",
+    }}
+  >
+    <div style={{
+      display: 'flex',
+      alignContent: 'center',
+      justifyContent: 'center',
+      justifyItems: "center",
+
+    }}>
+
+
+      {children}
+    </div>
+  </AbsoluteFill>
+}
+
+const AfterCreditItem: React.FC<AfterCreditType> = ({ name, source_type, metadata, isSingle }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
 
@@ -160,6 +136,7 @@ const CreditItem: React.FC<Credit> = ({ name, source_type, metadata }) => {
 
 
   return (
+
     <div style={{
       transform: `scale(${scale})`,
       backgroundColor: "white",
@@ -174,23 +151,148 @@ const CreditItem: React.FC<Credit> = ({ name, source_type, metadata }) => {
       borderRadius: '20px',
       justifyItems: 'center',
       alignItems: 'center',
-
-
     }}>
-      <SourceType sourceType={source_type} />
+      <SourceTypeComp sourceType={source_type} />
       <Description name={name} metadata={metadata} />
     </div>
-
-
   )
 }
-export default CreditItem;
+
+const Main: React.FC<AfterCreditType> = (credit) => {
+
+  if (credit.isSingle)
+    return (
+      <Single>
+        <AfterCreditItem {...credit} />
+      </Single>
+    )
+
+  return (
+    <AfterCreditItem {...credit} />
+  )
+
+}
+
+export default Main;
+
 ```
 
-The `scale` spring value just resizes the component for an added effect when it is added in the `div` component.
+The component contains simple animation, using the `scale` the `div` layer is animated. The `Description` component has it's own animation. Full code in here [description](#the-description),
+
+![](videos/single_component_not_centered.gif)
 
 
-## The Description
+The `Single` component will center the `After Credit item` if we pass the parameter `isSingle`.
+
+![](videos/single_component_centered.gif)
+
+
+### Rendering individual After Credit
+1. Let's start with creating a separate typescript file.
+
+```tsx twoslash
+  import path from "path";
+import { bundle } from "@remotion/bundler";
+import { getCompositions, renderMedia } from "@remotion/renderer";
+import { AfterCreditType } from "./AfterCredits/types";
+import afterCredits from "./AfterCredits/creditsdata.json"
+
+
+const renderOne = async (credit: AfterCreditType, bundleLocation: string, compositionId: string, entry: String) => {
+    // Parametrize the video by passing arbitrary props to your component.
+
+    // Extract all the compositions you have defined in your project
+    // from the webpack bundle.
+    const comps = await getCompositions(bundleLocation, {
+        // You can pass custom input props that you can retrieve using getInputProps()
+        // in the composition list. Use this if you want to dynamically set the duration or
+        // dimensions of the video.
+        inputProps: credit,
+    });
+
+    // Select the composition you want to render.
+    const composition = comps.find((c) => c.id === compositionId);
+
+    // Ensure the composition exists
+    if (!composition) {
+        throw new Error(`No composition with the ID ${compositionId} found.
+  Review "${entry}" for the correct ID.`);
+    }
+
+    const outputLocation = `out/${credit.name}.mp4`;
+    console.log("Attempting to render:", outputLocation);
+    await renderMedia({
+        composition,
+        serveUrl: bundleLocation,
+        codec: "h264",
+        outputLocation,
+        inputProps: credit,
+    });
+    console.log("Render done!");
+}
+
+
+const start = async () => {
+
+    // The composition you want to render
+    const compositionId = "AfterCreditItem";
+
+    // You only have to do this once, you can reuse the bundle.
+    const entry = "src/index.ts";
+    console.log("Creating a Webpack bundle of the video");
+
+
+    const bundleLocation = await bundle(path.resolve(entry), () => undefined, {
+        // If you have a Webpack override, make sure to add it here
+        webpackOverride: (config) => config,
+
+    });
+
+
+    afterCredits.forEach(async element => {
+        const singleCredit = { ...element, isSingle: true }
+        await renderOne(singleCredit, bundleLocation, compositionId, entry);
+
+    });
+    console.log("render all");
+
+}
+
+start();
+
+```
+
+The `start` function is the entry point of the render process, it resolves the path of the bundle, `afterCredits` contains the list if items for render, and passed on to  `renderOne` to render the `item` individually.
+
+From `renderOne` function, will bundle the remotion project, find our composition ie. `AfterCreditItem`, pass the  `item` values(`singleCredit`) as a property for rendering the composition. Each video is rendered in `out` folder.
+
+
+### Running from CLI
+
+To help us in running the render, we need to install ts-node from npm `npm install ts-node`
+
+
+From package.json, I have added this to the remotion project.
+
+```tsx twoslash
+  "render": "ts-node ./src/render.ts",
+```
+
+`npm run render`
+
+This will initiate the render process.
+![](videos/cli.gif)
+
+
+Output file:
+
+This will initiate the render process.
+![](videos/all_files.png)
+
+
+
+## Extras
+### The Description
 
 The description component contains the `name` of the `credit` item and `metadata.project_url`.
 The `name` will be shown first then followed by `project_url`.
@@ -253,7 +355,7 @@ export default Description;
 The `name`'s `div` container will be positioned in place of `{metadata.project_url}` `div` container, then will move up based on `moveY` value. After that on `opacity` between frame `50 to 100` the `project_url` will slowly show.
 
 
-## Extra - Icons based on source type
+## Icons based on source type
 
 This are svg icons retrieved from icon's respective website, source can be either github or npm.
 
