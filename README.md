@@ -278,15 +278,18 @@ From package.json, we added this.
   "render": "ts-node ./src/render.ts",
 ```
 
-`npm run render`
 
-This will initiate the render process.
+```bash
+ npm run render
+```
+
 ![](videos/cli.gif)
 
-
-Output file:
-
 This will initiate the render process.
+
+
+### Output files:
+
 ![](videos/all_files.png)
 
 
