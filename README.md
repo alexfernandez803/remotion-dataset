@@ -283,15 +283,16 @@ From package.json, we added this.
  npm run render
 ```
 
-![](videos/cli.gif)
 
 This will initiate the render process.
+
+https://user-images.githubusercontent.com/7582277/202883306-11feddc0-36ce-4a0e-9e50-7234cc575d61.mov
+
 
 
 ### Output files:
 
 ![](videos/all_files.png)
-
 
 
 ## See also
