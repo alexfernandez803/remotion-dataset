@@ -291,6 +291,12 @@ This will initiate the render process.
 
 
 
+## See also
+
+- [Video - Animation using remotion](https://fb.watch/gVmZpFmVJ0/)
+- [Project - Full source code](https://github.com/alexfernandez803/remotion-dataset)
+  
+
 ## Extras
 ### The Description
 
