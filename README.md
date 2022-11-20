@@ -49,7 +49,7 @@ The record contains bill of materials or credits to project that is used to crea
     }
   }
 ```
-2. Another record from github that we learned the technique
+2. Another record from github that we learned a technique or inspiration.
 
 ```json
   {
@@ -177,7 +177,7 @@ export default Main;
 
 ```
 
-The component contains simple animation, using the `scale` the `div` layer is animated. The `Description` component has it's own animation. Full code in here [description](#the-description),
+The component contains simple animation, using the `scale` in the `div` layer is animated. The `Description` component has it's own animation. Full code in here [description](#the-description),
 
 ![](videos/single_component_not_centered.gif)
 
@@ -187,8 +187,9 @@ The `Single` component will center the `After Credit item` if we pass the parame
 ![](videos/single_component_centered.gif)
 
 
-### Rendering individual After Credit
-1. Let's start with creating a separate typescript file.
+### Rendering individual after credit
+
+Let's start with creating a separate typescript file.
 
 ```tsx twoslash
   import path from "path";
@@ -262,17 +263,16 @@ start();
 
 ```
 
-The `start` function is the entry point of the render process, it resolves the path of the bundle, `afterCredits` contains the list if items for render, and passed on to  `renderOne` to render the `item` individually.
+The `start` function is the entry point of the render process, it resolves the path of the bundle and composition project, `afterCredits` contains the list if items to render, and passed on to `renderOne` for rendering the `item` individually.
 
-From `renderOne` function, will bundle the remotion project, find our composition ie. `AfterCreditItem`, pass the  `item` values(`singleCredit`) as a property for rendering the composition. Each video is rendered in `out` folder.
+From `renderOne` function, it will bundle the remotion project, find our composition ie. `AfterCreditItem`, pass the  `item` values(`singleCredit`) as a property for rendering the composition. Each video is rendered in `out` folder.
 
 
 ### Running from CLI
 
 To help us in running the render, we need to install ts-node from npm `npm install ts-node`
 
-
-From package.json, I have added this to the remotion project.
+From package.json, we added this.
 
 ```tsx twoslash
   "render": "ts-node ./src/render.ts",
