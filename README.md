@@ -1,11 +1,6 @@
-# Remotion Intro Video
+# JSON dataset with Remotion
 
----
-id: dataset
-title: JSON dataset with Remotion
----
-
-Example usage of a Dataset or sets of record in Remotion. The dataset is a collection of package or tutorial used in project.
+## Example usage of a Dataset or sets of record in Remotion. The dataset is a collection of package or tutorial used in project.
 
 
 ## Completed video with all after credits 
