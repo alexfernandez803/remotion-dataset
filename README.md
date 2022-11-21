@@ -21,6 +21,7 @@ How to individually extract a video with different parameter from a set of recor
 Create a separate process to bundle the remotion project, pass the data and render video separately using node js. We will be leveraging `@remotion/renderer` package and [render video in nodejs ](https://www.remotion.dev/docs/ssr/#render-a-video-using-nodejs-apis).
 
 
+
 ## Let's work out the solution
 
 ### This assumes that you already bootstrapped you're remotion project
@@ -78,7 +79,7 @@ export {
 
 ```
 
-This represents the json into React parameter types
+This represents the json into React parameter types. 
 
 ## React component to represent individual after credit
 
@@ -293,7 +294,7 @@ https://user-images.githubusercontent.com/7582277/202883306-11feddc0-36ce-4a0e-9
 ## See also
 
 - [Video - Animation using remotion](https://fb.watch/gVmZpFmVJ0/)
-- [Project - Full source code](https://github.com/alexfernandez803/remotion-dataset)
+- [Inspiration for the animation](https://github.com/wcandillon/remotion-fireship)
   
 
 ## Extras
