@@ -4,5 +4,6 @@
 
 import {Config} from 'remotion';
 
-Config.Rendering.setImageFormat('jpeg');
-Config.Output.setOverwriteOutput(true);
+Config.setImageFormat('jpeg');
+Config.setOverwriteOutput(true);
+Config.setConcurrency(100);
