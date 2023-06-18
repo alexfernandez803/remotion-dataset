@@ -38,9 +38,6 @@ const renderOne = async (
 		codec: 'h264',
 		outputLocation,
 		inputProps: credit,
-		onProgress: (progress) => {
-			console.log(progress);
-		},
 	});
 	console.log('Render done!');
 };
@@ -65,4 +62,9 @@ const start = async () => {
 	console.log('render all');
 };
 
-start();
+start()
+	.then(() => process.exit(0))
+	.catch((err) => {
+		console.error(err);
+		process.exit(1);
+	});
