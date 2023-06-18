@@ -63,7 +63,9 @@ const start = async () => {
 };
 
 start()
-	.then(() => process.exit(0))
+	.then(() => {
+		console.log('Render Started.');
+	})
 	.catch((err) => {
 		console.error(err);
 		process.exit(1);
