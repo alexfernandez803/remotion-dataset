@@ -1,34 +1,26 @@
 import path from 'path';
 import {bundle} from '@remotion/bundler';
-import {getCompositions, renderMedia} from '@remotion/renderer';
+import {selectComposition, renderMedia} from '@remotion/renderer';
 import {AfterCreditType} from './AfterCredits/types';
 import json from './AfterCredits/creditsdata.json';
 
 const renderOne = async (
 	credit: AfterCreditType,
 	bundleLocation: string,
-	compositionId: string,
-	entry: string
+	compositionId: string
 ) => {
 	// Parametrize the video by passing arbitrary props to your component.
 
 	// Extract all the compositions you have defined in your project
 	// from the webpack bundle.
-	const comps = await getCompositions(bundleLocation, {
+	const composition = await selectComposition({
 		// You can pass custom input props that you can retrieve using getInputProps()
 		// in the composition list. Use this if you want to dynamically set the duration or
 		// dimensions of the video.
+		serveUrl: bundleLocation,
 		inputProps: credit,
+		id: compositionId,
 	});
-
-	// Select the composition you want to render.
-	const composition = comps.find((c) => c.id === compositionId);
-
-	// Ensure the composition exists
-	if (!composition) {
-		throw new Error(`No composition with the ID ${compositionId} found.
-  Review "${entry}" for the correct ID.`);
-	}
 
 	const outputLocation = `out/${credit.name}.mp4`;
 	console.log('Attempting to render:', outputLocation);
@@ -55,11 +47,11 @@ const start = async () => {
 		webpackOverride: (config) => config,
 	});
 
-	json.forEach(async (element) => {
+	for (const element of json) {
 		const singleCredit = {...element, isSingle: true};
-		await renderOne(singleCredit, bundleLocation, compositionId, entry);
-	});
-	console.log('render all');
+		await renderOne(singleCredit, bundleLocation, compositionId);
+	}
+	console.log('All compositions rendered.');
 };
 
 start()
